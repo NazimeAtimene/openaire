@@ -2,7 +2,7 @@ package be.ewi.fris.openaire;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import eu.openaire.cerifProfile.x11.*;
+//import eu.openaire.cerifProfile.x11.*;
 
 @SpringBootApplication
 public class OpenaireApplication {
@@ -12,7 +12,7 @@ public class OpenaireApplication {
     }
 
 
-    private void testCaseForCreators() {
+   /* private void testCaseForCreators() {
         ProductDocument.Product.Creators creators = ProductDocument.Product.Creators.Factory.newInstance();
         CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType participantName = CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType.Factory.newInstance();
         PersonDocument.Person person = PersonDocument.Person.Factory.newInstance();
@@ -27,5 +27,5 @@ public class OpenaireApplication {
         participantName.setPersonSubstitutionGroupHead(person);
         creators.setCreatorArray(new eu.openaire.cerifProfile.x11.CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType[]{participantName});
 
-    }
+    }*/
 }

@@ -103,7 +103,7 @@
 								<include>openaire-cerif-profile.xsd</include>
 							</includes>
 							<outputDir>docs/_build</outputDir>
-							<stylesheet>schemas/scripts/xsd2cerif-rst.xsl</stylesheet>
+
 						</transformationSet>
 						<transformationSet>
 							<dir>.</dir>
@@ -121,7 +121,6 @@
 								<exclude>schemas/vocabularies/coar_resourcetypes.xsd</exclude>
 							</excludes>
 							<outputDir>target</outputDir>
-							<stylesheet>tools/xslt/add-version-notice-to-xsd.xsl</stylesheet>
 							<parameters>
 								<parameter>
 									<name>version</name>
