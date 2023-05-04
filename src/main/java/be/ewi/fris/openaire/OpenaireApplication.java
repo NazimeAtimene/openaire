@@ -1,8 +1,14 @@
 package be.ewi.fris.openaire;
 
+import https.www_openaire_eu.cerif_profile._1.CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType;
+import https.www_openaire_eu.cerif_profile._1.CfStringType;
+import https.www_openaire_eu.cerif_profile._1.Person;
+import https.www_openaire_eu.cerif_profile._1.Product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import eu.openaire.cerifProfile.x11.*;
+
+import javax.xml.namespace.QName;
+
 
 @SpringBootApplication
 public class OpenaireApplication {
@@ -12,20 +18,22 @@ public class OpenaireApplication {
     }
 
 
-   /* private void testCaseForCreators() {
-        ProductDocument.Product.Creators creators = ProductDocument.Product.Creators.Factory.newInstance();
-        CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType participantName = CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType.Factory.newInstance();
-        PersonDocument.Person person = PersonDocument.Person.Factory.newInstance();
-        PersonDocument.Person.PersonName personName = PersonDocument.Person.PersonName.Factory.newInstance();
-        CfStringType lastNames = CfStringType.Factory.newInstance();
-        lastNames.setStringValue("lastname");
+    private static void populateCreatorsForProduct() {
+        Product product = new Product();
+        Product.Creators creators = new Product.Creators();
+        CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType participantName = new CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType();
+        Person person = new Person();
+        Person.PersonName personName = new Person.PersonName();
+        CfStringType lastNames = new CfStringType();
+        lastNames.setValue("lastname");
         personName.setFamilyNames(lastNames);
-        CfStringType firstNames = CfStringType.Factory.newInstance();
-        firstNames.setStringValue("firstname");
+        CfStringType firstNames = new CfStringType();
+        firstNames.setValue("firstName");
         personName.setFirstNames(firstNames);
         person.setPersonName(personName);
-        participantName.setPersonSubstitutionGroupHead(person);
-        creators.setCreatorArray(new eu.openaire.cerifProfile.x11.CfLinkWithDisplayNameToPersonWithAffiliationsOrOrgUnitType[]{participantName});
-
-    }*/
+        QName qname = new QName("https://www.openaire.eu/cerif-profile/1.1/", "Person");
+        participantName.setPersonSubstitutionGroupHead(new javax.xml.bind.JAXBElement<Person>(qname, Person.class, person));
+        creators.getCreator().add(participantName);
+        product.setCreators(creators);
+    }
 }

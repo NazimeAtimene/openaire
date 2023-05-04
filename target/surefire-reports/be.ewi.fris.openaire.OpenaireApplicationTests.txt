@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: be.ewi.fris.openaire.OpenaireApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.393 s - in be.ewi.fris.openaire.OpenaireApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.501 s - in be.ewi.fris.openaire.OpenaireApplicationTests

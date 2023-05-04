@@ -55,97 +55,22 @@
 			<artifactId>jaxb-jxc</artifactId>
 			<version>2.2.11</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2.11</version>
+		</dependency>
+
+		<!-- JAXB RI -->
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>xml-maven-plugin</artifactId>
-				<version>1.0.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>validate</goal>
-							<goal>transform</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<forceCreation>true</forceCreation>
-					<validationSets>
-						<validationSet>
-							<dir>samples</dir>
-							<validating>true</validating>
-							<excludes>
-								<exclude>_schematron_output/*.xml</exclude>
-							</excludes>
-						</validationSet>
-						<validationSet>
-							<dir>schemas</dir>
-							<validating>true</validating>
-							<excludes>
-								<exclude>**/catalog.xml</exclude>
-								<exclude>**/*.out.xml</exclude>
-								<exclude>**/*.txt</exclude>
-								<exclude>**/*.sch</exclude>
-								<exclude>**/*.xslt</exclude>
-								<exclude>scripts/*</exclude>
-								<exclude>cached/*</exclude>
-								<exclude>**/00-preparations/**/*</exclude>
-							</excludes>
-						</validationSet>
-					</validationSets>
-					<transformationSets>
-						<transformationSet>
-							<dir>schemas</dir>
-							<includes>
-								<include>openaire-cerif-profile.xsd</include>
-							</includes>
-							<outputDir>docs/_build</outputDir>
-
-						</transformationSet>
-						<transformationSet>
-							<dir>.</dir>
-							<includes>
-								<include>schemas/**/*.xsd</include>
-								<include>samples/*.xml</include>
-							</includes>
-							<excludes>
-								<exclude>**/catalog.xml</exclude>
-								<exclude>**/*.out.xml</exclude>
-								<exclude>**/*.txt</exclude>
-								<exclude>**/*.sch</exclude>
-								<exclude>**/*.xslt</exclude>
-								<exclude>schemas/scripts/*</exclude>
-								<exclude>schemas/vocabularies/coar_resourcetypes.xsd</exclude>
-							</excludes>
-							<outputDir>target</outputDir>
-							<parameters>
-								<parameter>
-									<name>version</name>
-									<value>${project.version}</value>
-								</parameter>
-								<parameter>
-									<name>doi</name>
-									<value>${doi}</value>
-								</parameter>
-							</parameters>
-						</transformationSet>
-					</transformationSets>
-					<catalogs>
-						<catalog>schemas/cached/catalog.xml</catalog>
-						<catalog>schemas/catalog.xml</catalog>
-					</catalogs>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>net.sf.saxon</groupId>
-						<artifactId>Saxon-HE</artifactId>
-						<version>9.8.0-12</version>
-					</dependency>
-				</dependencies>
-			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>3.1.0</version>
@@ -175,51 +100,25 @@
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>xmlbeans-maven-plugin</artifactId>
-				<version>2.3.3</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.xmlbeans</groupId>
-						<artifactId>xmlbeans</artifactId>
-						<version>2.6.0</version>
-					</dependency>
-				</dependencies>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>2.5.0</version>
 				<executions>
 					<execution>
-						<phase>process-classes</phase>
+						<id>xjc</id>
 						<goals>
-							<goal>xmlbeans</goal>
+							<goal>xjc</goal>
 						</goals>
 					</execution>
 				</executions>
 				<configuration>
-					<noJavac>true</noJavac>
-					<download>true</download>
-					<classGenerationDirectory>${project.build.outputDirectory}</classGenerationDirectory>
-					<schemaDirectory>src/main/resources/schemas</schemaDirectory>
-					<memoryInitialSize>512m</memoryInitialSize>
-					<memoryMaximumSize>512m</memoryMaximumSize>
+					<sources>
+						<source>src/main/resources/schemas/openaire-cerif-profile.xsd</source>
+					</sources>
+					<clearOutputDir>false</clearOutputDir>
+					<noPackageLevelAnnotations>true</noPackageLevelAnnotations>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>target/generated-sources/xjc</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+
 
 		</plugins>
 	</build>
